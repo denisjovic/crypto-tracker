@@ -127,8 +127,8 @@ footer p a {
 
 /* loader */
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 16px solid whitesmoke;
+  border-top: 16px solid #303030;
   border-radius: 50%;
   width: 3em;
   height: 3em;

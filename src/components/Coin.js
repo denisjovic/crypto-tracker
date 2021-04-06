@@ -23,7 +23,7 @@ const Coin = ({
           {priceChange < 0 ? (
             <p className='coin-percent red'>{priceChange.toFixed(2)}%</p>
           ) : (
-            <p className='coin-percent green'>{priceChange.toFixed(2)}%</p>
+            <p className='coin-percent green'>+{priceChange.toFixed(2)}%</p>
           )}
           <p className='coin-marketcap'>mkt cap: ${market.toLocaleString()}</p>
         </div>

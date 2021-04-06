@@ -6,8 +6,12 @@ function App() {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState('');
   const [loader, setLoader] = useState(true);
+  const [errText, setErrText] = useState('');
+
+  const err =
+    'Something went wrong, please try again or check your internet connection.';
   const url =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=25&page=1&sparkline=false';
 
   const getData = async () => {
     try {
@@ -15,7 +19,10 @@ function App() {
       let data = await response.json();
       setCoins(data);
       setLoader(false);
+      setErrText('');
     } catch (error) {
+      setLoader(false);
+      setErrText(err);
       console.error(error);
     }
   };
@@ -46,6 +53,7 @@ function App() {
         </form>
       </div>
       {loader && <div className='loader'></div>}
+      {err && errText}
       {filterCoins.map((coin) => {
         return (
           <Coin
