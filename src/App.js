@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 function App() {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState('');
+  const [loader, setLoader] = useState(true);
   const url =
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false';
 
@@ -13,7 +14,7 @@ function App() {
       let response = await fetch(url);
       let data = await response.json();
       setCoins(data);
-      console.log('use effect works', data);
+      setLoader(false);
     } catch (error) {
       console.error(error);
     }
@@ -44,6 +45,7 @@ function App() {
           />
         </form>
       </div>
+      {loader && <div className='loader'></div>}
       {filterCoins.map((coin) => {
         return (
           <Coin
@@ -64,3 +66,6 @@ function App() {
 }
 
 export default App;
+
+// TODO: add light vs dark theme toggle switch
+//TODO: add loading indicator
