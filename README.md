@@ -1,4 +1,9 @@
 https://denisjovic.github.io/crypto-tracker/
 
-## npm install
-## npm start (to run locally)
+Initially created with pure React/JS, but converted to TypeScript.
+
+
+### Install and rin
+```npm install```
+(to run locally)
+```npm start```
