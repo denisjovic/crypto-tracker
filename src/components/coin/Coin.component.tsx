@@ -1,6 +1,9 @@
 import React from 'react';
+import './Coin.styles.scss';
+import { CoinProps } from '../../App';
 
-const Coin = ({
+
+const Coin: React.FC<CoinProps> = ({
   img,
   coinName,
   symbol,

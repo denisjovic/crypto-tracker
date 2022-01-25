@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react';
-import Coin from './components/Coin';
-import Footer from './components/Footer';
+import { useState, useEffect } from "react";
+import Footer from "./components/footer/Footer.component.tsx";
+import Coin from "./components/coin/Coin.component.tsx";
+
+
 
 function App() {
   const [coins, setCoins] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [loader, setLoader] = useState(true);
-  const [errText, setErrText] = useState('');
+  const [errText, setErrText] = useState("");
 
   const err =
-    'Something went wrong, please try again or check your internet connection.';
+    "Something went wrong, please try again or check your internet connection.";
   const url =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=25&page=1&sparkline=false';
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=25&page=1&sparkline=false";
 
   const getData = async () => {
     try {
@@ -19,7 +21,7 @@ function App() {
       let data = await response.json();
       setCoins(data);
       setLoader(false);
-      setErrText('');
+      setErrText("");
     } catch (error) {
       setLoader(false);
       setErrText(err);
@@ -39,14 +41,30 @@ function App() {
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
+
+  const renderCoin = (coin: any): JSX.Element[] => {
+    return (
+          <Coin
+            key={coin.id}
+            coinName={coin.name}
+            img={coin.image}
+            volume={coin.total_volume}
+            symbol={coin.symbol}
+            market={coin.market_cap}
+            price={coin.current_price}
+            priceChange={coin.price_change_percentage_24h}
+          />
+        );
+  }
+
   return (
     <div className='coin-app'>
       <div className='coin-search'>
-        <h1 className='coin-text'>Search a currency</h1>
+        <h1 className='coin-text'>Crypto Currency</h1>
         <form>
           <input
             type='text'
-            placeholder='Search'
+            placeholder='Search...  &#128270;'
             className='coin-input'
             onChange={handleChange}
           />
