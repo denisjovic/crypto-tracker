@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+//@ts-ignore
 import Footer from "./components/footer/Footer.component.tsx";
+//@ts-ignore
 import Coin from "./components/coin/Coin.component.tsx";
 
 export interface CoinProps {
