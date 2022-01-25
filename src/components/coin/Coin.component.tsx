@@ -3,7 +3,7 @@ import './Coin.styles.scss';
 import { CoinProps } from '../../App';
 
 
-const Coin: React.FC<CoinProps> = ({
+const Coin: React.FC<CoinProps['coin']> = ({
   img,
   coinName,
   symbol,

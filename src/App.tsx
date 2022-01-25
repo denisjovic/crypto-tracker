@@ -2,7 +2,18 @@ import { useState, useEffect } from "react";
 import Footer from "./components/footer/Footer.component.tsx";
 import Coin from "./components/coin/Coin.component.tsx";
 
-
+export interface CoinProps {
+  coin: {
+            key: string,
+            coinName: string,
+            img: string,
+            volume: number,
+            symbol: string,
+            market: number,
+            price: number
+            priceChange: number
+  }
+}
 
 function App() {
   const [coins, setCoins] = useState([]);
@@ -33,7 +44,7 @@ function App() {
     getData();
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(e.target.value);
   };
 
@@ -42,25 +53,23 @@ function App() {
   );
 
 
-  const renderCoin = (coin: any): JSX.Element[] => {
-    return (
-          <Coin
-            key={coin.id}
-            coinName={coin.name}
-            img={coin.image}
-            volume={coin.total_volume}
-            symbol={coin.symbol}
-            market={coin.market_cap}
-            price={coin.current_price}
-            priceChange={coin.price_change_percentage_24h}
-          />
-        );
-  }
+  const renderCoin = (): JSX.Element[] => filterCoins.map((coin) => {
+    return <Coin
+      key={coin.id}
+      coinName={coin.name}
+      img={coin.image}
+      volume={coin.total_volume}
+      symbol={coin.symbol}
+      market={coin.market_cap}
+      price={coin.current_price}
+      priceChange={coin.price_change_percentage_24h} />;
+
+  })
 
   return (
     <div className='coin-app'>
       <div className='coin-search'>
-        <h1 className='coin-text'>Crypto Currency</h1>
+        <h1 className='coin-text'>Crypto Tracker</h1>
         <form>
           <input
             type='text'
@@ -72,20 +81,7 @@ function App() {
       </div>
       {loader && <div className='loader'></div>}
       {err && errText}
-      {filterCoins.map((coin) => {
-        return (
-          <Coin
-            key={coin.id}
-            coinName={coin.name}
-            img={coin.image}
-            volume={coin.total_volume}
-            symbol={coin.symbol}
-            market={coin.market_cap}
-            price={coin.current_price}
-            priceChange={coin.price_change_percentage_24h}
-          />
-        );
-      })}
+      {filterCoins.length ? renderCoin() : <h2>Currency does not exist, please try again.</h2>}
       <Footer />
     </div>
   );
@@ -94,4 +90,3 @@ function App() {
 export default App;
 
 // TODO: add light vs dark theme toggle switch
-//TODO: add loading indicator
