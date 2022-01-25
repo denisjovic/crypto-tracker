@@ -48,12 +48,12 @@ function App() {
     setSearch(e.target.value);
   };
 
-  const filterCoins = coins.filter((coin) =>
+  const filterCoins = coins.filter((coin:any) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
 
-  const renderCoin = (): JSX.Element[] => filterCoins.map((coin) => {
+  const renderCoin = (): JSX.Element[] => filterCoins.map((coin:any) => {
     return <Coin
       key={coin.id}
       coinName={coin.name}
